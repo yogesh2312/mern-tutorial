@@ -22,6 +22,9 @@ app.use(logger);
 
 app.use('/api/goals',goals);
 app.use('/api/users',users);
+app.get('/ping', (req, res) => {
+    res.send('pong');
+  });
 
 if(process.env.NODE_ENV === 'production'){
     console.log('Serving static from:', path.join(__dirname, '../frontend/dist'));
