@@ -8,13 +8,14 @@
     "start": "node server.js",
     "server": "node --watch --env-file=.env backend/server.js",
     "client": "npm run dev --prefix frontend",
-    "dev" : "concurrently \"npm run server\" \"npm run client\" "
+    "dev": "concurrently \"npm run server\" \"npm run client\" "
   },
   "author": "yogesh k chikhale",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^6.0.0",
     "colors": "^1.4.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "express-async-handler": "^1.2.0",
