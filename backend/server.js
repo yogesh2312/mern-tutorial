@@ -5,6 +5,12 @@ import users from './routes/userRoutes.js';
 import errorHandler  from './middleware/error.js';
 import logger from './middleware/logger.js';
 import { connectDB } from './config/db.js'; 
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 connectDB();
 const port = process.env.PORT || 8000;
@@ -16,6 +22,22 @@ app.use(logger);
 
 app.use('/api/goals',goals);
 app.use('/api/users',users);
+
+if(process.env.NODE_ENV === 'production'){
+    console.log('Serving static from:', path.join(__dirname, '../frontend/dist'));
+console.log('NODE_ENV:', process.env.NODE_ENV);
+
+    app.use(express.static(path.join(__dirname,'../frontend/dist')));
+    app.get('/*splat', (req, res) =>
+        res.sendFile(path.resolve(__dirname, '../frontend/dist/index.html'))
+    );
+}
+else {
+    app.get('/', (req, res) => res.send('Please set to production'));
+  }
+
+
+
 app.use(errorHandler);
 
 

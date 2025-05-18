@@ -6,8 +6,9 @@
   "type": "module",
   "scripts": {
     "start": "node backend/server.js",
-    "dev": "node --watch --env-file=.env backend/server.js", 
-    "client":"npm run dev --prefix frontend"
+    "server": "node --watch --env-file=.env backend/server.js",
+    "client": "npm run dev --prefix frontend",
+    "dev" : "concurrently \"npm run server\" \"npm run client\" "
   },
   "author": "yogesh k chikhale",
   "license": "MIT",
@@ -19,5 +20,8 @@
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.15.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
   }
 }
